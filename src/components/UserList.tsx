@@ -25,7 +25,7 @@ export const UserList = () => {
         <p>Пагинация</p>
       </div>
       <ul>
-        {data.users.map((user) => (
+        {data.map((user) => (
           <li key={user.id}>
             <UserListItem data={user} />
           </li>

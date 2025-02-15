@@ -4,12 +4,14 @@ export interface IUserDto {
   firstName: string;
 }
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 export const getUsers = async ({
   signal,
 }: {
   signal: AbortSignal;
-}): Promise<{ users: IUserDto[] }> => {
-  return fetch('https://dummyjson.com/users', { signal }).then((res) =>
+}): Promise<IUserDto[]> => {
+  return fetch(`${BASE_URL}/users`, { signal }).then((res) =>
     res.json()
   );
 };
