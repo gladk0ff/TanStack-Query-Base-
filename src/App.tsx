@@ -5,10 +5,9 @@ import { UserList } from './components/UserList';
 function App() {
   const [isOpen, open] = useState(false);
   return (
-    <main>
-      <div>
-        <button>Добавить котика</button>
-      </div>
+    <main className="p-4 flex flex-col gap-3">
+      <h1 className='text-3xl'>Пользователи</h1>
+
       <UserList />
       {isOpen && <UserForm />}
     </main>
