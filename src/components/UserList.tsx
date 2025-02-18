@@ -28,7 +28,7 @@ export const UserList = () => {
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
   const btnAcions = btnClass + "bg-blue-200 hover:bg-blue-400";
-  const btnPg = btnClass + "bg-gray-200 hover:bg-gray-400";
+  const btnPg = btnClass + "bg-gray-200 hover:bg-gray-400 ";
 
   return (
     <section>
@@ -37,15 +37,24 @@ export const UserList = () => {
           <button className={btnAcions}>Добавить котика</button>
           <button className={btnAcions}>Включить</button>
         </div>
-        <div className="flex gap-2">
-          <button onClick={() => setPage((p) => ++p)} className={btnPg}>
-            След
+        <div className="flex gap-2 dis">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((p) => --p)}
+            className={
+              btnPg +
+              (page === 1
+                ? " disabled:pointer-events-none disabled:opacity-20"
+                : "")
+            }
+          >
+            {"<<"} Пред
           </button>
           <button
-            onClick={() => setPage((p) => Math.min(++p, 1))}
+            onClick={() => setPage((p) => Math.min(++p, users.pages))}
             className={btnPg}
           >
-            Пред
+            След {">>"}
           </button>
         </div>
       </div>
