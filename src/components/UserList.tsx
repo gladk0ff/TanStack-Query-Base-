@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getUsers, IUserDto } from "../api/users";
 import { useState } from "react";
 
@@ -13,9 +13,12 @@ export const UserList = () => {
     error,
     isPending,
   } = useQuery({
+    // staleTime: Infinity,
+    // gcTime: 1000,
     queryKey: ["users", page],
     queryFn: ({ queryKey, signal }) =>
       getUsers({ page: queryKey[1] as number }, { signal }),
+    placeholderData: keepPreviousData, // так же можно задать и функцию
   });
 
   if (isPending) {
