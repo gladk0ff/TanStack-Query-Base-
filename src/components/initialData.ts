@@ -628,3 +628,5 @@ export const INITIAL_DATA = {
     },
   ],
 };
+
+export const INITIAL_ALL_DATA = INITIAL_DATA.data;
