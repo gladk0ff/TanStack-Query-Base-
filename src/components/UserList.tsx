@@ -3,6 +3,7 @@ import { getAllUsers, getUsers, IUserDto } from "../api/users";
 import { useState } from "react";
 import classNames from "classnames";
 import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
+import { IPagination } from "../types";
 
 export const UserList = () => {
   // isPending  нет данных , и нет запроса
@@ -29,7 +30,7 @@ export const UserList = () => {
     placeholderData: keepPreviousData, // так же можно задать и функцию
     // наполняет кеш  запроса из другого источника (localeStorage,somedata)
     // очень полезен для ssr
-    // initialData: INITIAL_DATA,
+    initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
     // enabled: isLoadAll,
   });
 
