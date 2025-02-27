@@ -16,6 +16,9 @@ export const UserList = () => {
     error,
     isPending,
     isFetching,
+    isLoading,
+    status,
+    fetchStatus,
     isPlaceholderData,
   } = useQuery({
     // staleTime: Infinity,
@@ -27,14 +30,17 @@ export const UserList = () => {
     // наполняет кеш  запроса из другого источника (localeStorage,somedata)
     // очень полезен для ssr
     // initialData: INITIAL_DATA,
+    // enabled: isLoadAll,
   });
+
+  console.log("==>", status, fetchStatus);
 
   // сделать запрос на показ всех и пример посмотре с isFetching
   const { data: usersAll } = useQuery({
     queryKey: ["users-all"],
     queryFn: (meta) => getAllUsers(meta),
     enabled: isLoadAll,
-    // initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
+    initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
@@ -42,12 +48,33 @@ export const UserList = () => {
   const btnPg = btnClass + "bg-gray-200 hover:bg-gray-400 ";
   const btnDis = "disabled:pointer-events-none disabled:opacity-20";
 
-  if (isPending) {
-    return <p>Данные ожидаются</p>;
+  const statuses = [];
+  if (isLoading) {
+    //status ==="pending" && fetchStatus ==="fetching"
+    // данныъ нет пошла загрузка
+    console.log("==> isLoading", status, fetchStatus);
+    statuses.push(<p key="isLoading">Загрузка</p>);
+    // return <p>загрузка</p>;
   }
 
   if (isFetching) {
-    return <p>Идут запросы</p>;
+    // идет загрузка
+    //fetchStatus ==="fetching"
+    console.log("==> isFetching", status, fetchStatus);
+    statuses.push(<p key="isFetching">Идут запросы</p>);
+    // return <p>Идут запросы</p>;
+  }
+
+  if (isPending) {
+    //данных нет
+    //status ==="pending"
+    console.log("==> isPending", status, fetchStatus);
+    statuses.push(<p key="isPending">Данные ожидаются</p>);
+    // return <p>Данные ожидаются</p>;
+  }
+
+  if (statuses.length) {
+    return statuses;
   }
 
   if (error) {
