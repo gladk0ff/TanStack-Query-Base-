@@ -3,7 +3,9 @@ import { getAllUsers, getUsers, IUserDto } from "../api/users";
 import { useState } from "react";
 import classNames from "classnames";
 import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
-import { IPagination } from "../types";
+// import { IPagination } from "../types";
+// import { getUsersAll, getUsersWithPagination } from "../queries/users";
+// import { getUsersWithPagination } from "../queries/users";
 
 export const UserList = () => {
   // isPending  нет данных , и нет запроса
@@ -15,26 +17,26 @@ export const UserList = () => {
   const {
     data: users,
     error,
-    isPending,
-    isFetching,
     isLoading,
-    status,
-    fetchStatus,
     isPlaceholderData,
   } = useQuery({
-    // staleTime: Infinity,
+    // ...getUsersWithPagination(page, isLoadAll),
+    // // staleTime: Infinity,
     // gcTime: 1000,
     queryKey: ["users", page],
     queryFn: ({ queryKey, signal }) =>
       getUsers({ page: queryKey[1] as number }, { signal }),
-    placeholderData: keepPreviousData, // так же можно задать и функцию
+    // так же можно задать и функцию
+    placeholderData: keepPreviousData,
     // наполняет кеш  запроса из другого источника (localeStorage,somedata)
     // очень полезен для ssr
-    initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
+    // когда есть флаг isPlaceholderData не срабатывает
+    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
     // enabled: isLoadAll,
+    // ...getUsersWithPagination(page, isLoadAll),
   });
 
-  console.log("==>", status, fetchStatus);
+  // console.log("==>", status, fetchStatus);
 
   // сделать запрос на показ всех и пример посмотре с isFetching
   const { data: usersAll } = useQuery({
@@ -42,6 +44,7 @@ export const UserList = () => {
     queryFn: (meta) => getAllUsers(meta),
     enabled: isLoadAll,
     initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
+    // ...getUsersAll(isLoadAll),
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
@@ -49,40 +52,11 @@ export const UserList = () => {
   const btnPg = btnClass + "bg-gray-200 hover:bg-gray-400 ";
   const btnDis = "disabled:pointer-events-none disabled:opacity-20";
 
-  const statuses = [];
-  if (isLoading) {
-    //status ==="pending" && fetchStatus ==="fetching"
-    // данныъ нет пошла загрузка
-    console.log("==> isLoading", status, fetchStatus);
-    statuses.push(<p key="isLoading">Загрузка</p>);
-    // return <p>загрузка</p>;
-  }
-
-  if (isFetching) {
-    // идет загрузка
-    //fetchStatus ==="fetching"
-    console.log("==> isFetching", status, fetchStatus);
-    statuses.push(<p key="isFetching">Идут запросы</p>);
-    // return <p>Идут запросы</p>;
-  }
-
-  if (isPending) {
-    //данных нет
-    //status ==="pending"
-    console.log("==> isPending", status, fetchStatus);
-    statuses.push(<p key="isPending">Данные ожидаются</p>);
-    // return <p>Данные ожидаются</p>;
-  }
-
-  if (statuses.length) {
-    return statuses;
-  }
-
   if (error) {
     return <div>{JSON.stringify(error)}</div>;
   }
 
-  const usersData = isLoadAll ? usersAll : users.data;
+  const usersData = isLoadAll ? usersAll : users?.data;
 
   return (
     <section>
@@ -106,9 +80,9 @@ export const UserList = () => {
               {"<<"} Пред
             </button>
             <button
-              disabled={page === users.pages}
-              onClick={() => setPage((p) => Math.min(++p, users.pages))}
-              className={classNames(btnPg, page === users.pages && btnDis)}
+              disabled={page === users?.pages}
+              onClick={() => setPage((p) => Math.min(++p, users?.pages || 1))}
+              className={classNames(btnPg, page === users?.pages && btnDis)}
             >
               След {">>"}
             </button>
@@ -116,14 +90,16 @@ export const UserList = () => {
         )}
       </div>
 
+      {isLoading && <p>Загрузка</p>}
+
       <ul
         className={classNames(
           "bacground-color-gray flex flex-col  gap-2 mt-4",
-          isFetching && "opacity-50",
+          isPlaceholderData && "opacity-50",
           "overflow-y-auto max-h-110"
         )}
       >
-        {usersData.map((user) => (
+        {usersData?.map((user) => (
           <li key={user.id}>
             <UserListItem data={user} />
           </li>
@@ -141,3 +117,39 @@ const UserListItem = ({ data }: { data: IUserDto }) => {
     </div>
   );
 };
+
+// ПРО СТАТУСЫ
+// isPending,
+// isFetching,
+// isLoading,
+// status,
+// fetchStatus,
+
+// const statuses = [];
+// if (isLoading) {
+//   //status ==="pending" && fetchStatus ==="fetching"
+//   // данныъ нет пошла загрузка
+//   console.log("==> isLoading", status, fetchStatus);
+//   statuses.push(<p key="isLoading">Загрузка</p>);
+//   // return <p>загрузка</p>;
+// }
+
+// if (isFetching) {
+//   // идет загрузка
+//   //fetchStatus ==="fetching"
+//   console.log("==> isFetching", status, fetchStatus);
+//   statuses.push(<p key="isFetching">Идут запросы</p>);
+//   // return <p>Идут запросы</p>;
+// }
+
+// if (isPending) {
+//   //данных нет
+//   //status ==="pending"
+//   console.log("==> isPending", status, fetchStatus);
+//   statuses.push(<p key="isPending">Данные ожидаются</p>);
+//   // return <p>Данные ожидаются</p>;
+// }
+
+// if (statuses.length) {
+//   return statuses;
+// }
