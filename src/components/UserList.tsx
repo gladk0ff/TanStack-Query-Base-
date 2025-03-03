@@ -4,9 +4,6 @@ import { useState } from "react";
 import classNames from "classnames";
 import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
 // import { IPagination } from "../types";
-// import { getUsersAll, getUsersWithPagination } from "../queries/users";
-// import { getUsersWithPagination } from "../queries/users";
-
 export const UserList = () => {
   // isPending  нет данных , и нет запроса
   // isFetching идет любой запрос к серверу
@@ -20,7 +17,6 @@ export const UserList = () => {
     isLoading,
     isPlaceholderData,
   } = useQuery({
-    // ...getUsersWithPagination(page, isLoadAll),
     // // staleTime: Infinity,
     // gcTime: 1000,
     queryKey: ["users", page],
@@ -33,7 +29,6 @@ export const UserList = () => {
     // когда есть флаг isPlaceholderData не срабатывает
     // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
     // enabled: isLoadAll,
-    // ...getUsersWithPagination(page, isLoadAll),
   });
 
   // console.log("==>", status, fetchStatus);
@@ -44,7 +39,6 @@ export const UserList = () => {
     queryFn: (meta) => getAllUsers(meta),
     enabled: isLoadAll,
     initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
-    // ...getUsersAll(isLoadAll),
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
