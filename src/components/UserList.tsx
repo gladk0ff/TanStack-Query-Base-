@@ -1,13 +1,10 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getAllUsers, getUsers, IUserDto } from "../api/users";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import classNames from "classnames";
-import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
-// import { IPagination } from "../types";
-export const UserList = () => {
-  // isPending  нет данных , и нет запроса
-  // isFetching идет любой запрос к серверу
+import { getUsersAll, getUsersWithPagination } from "../queries/users";
+import { UserListItem } from "./common/UserListItem";
 
+export const UserList = () => {
   const [page, setPage] = useState(1);
   const [isLoadAll, setLoadAll] = useState(false);
 
@@ -17,28 +14,11 @@ export const UserList = () => {
     isLoading,
     isPlaceholderData,
   } = useQuery({
-    // // staleTime: Infinity,
-    // gcTime: 1000,
-    queryKey: ["users", page],
-    queryFn: ({ queryKey, signal }) =>
-      getUsers({ page: queryKey[1] as number }, { signal }),
-    // так же можно задать и функцию
-    placeholderData: keepPreviousData,
-    // наполняет кеш  запроса из другого источника (localeStorage,somedata)
-    // очень полезен для ssr
-    // когда есть флаг isPlaceholderData не срабатывает
-    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
-    // enabled: isLoadAll,
+    ...getUsersWithPagination(page, !isLoadAll),
   });
 
-  // console.log("==>", status, fetchStatus);
-
-  // сделать запрос на показ всех и пример посмотре с isFetching
   const { data: usersAll } = useQuery({
-    queryKey: ["users-all"],
-    queryFn: (meta) => getAllUsers(meta),
-    enabled: isLoadAll,
-    initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
+    ...getUsersAll(isLoadAll),
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
@@ -102,48 +82,3 @@ export const UserList = () => {
     </section>
   );
 };
-
-const UserListItem = ({ data }: { data: IUserDto }) => {
-  return (
-    <div className="flex gap-2 border border-blue-100 rounded p-1">
-      <span>{data.age}</span>
-      <span>{data.firstName}</span>
-    </div>
-  );
-};
-
-// ПРО СТАТУСЫ
-// isPending,
-// isFetching,
-// isLoading,
-// status,
-// fetchStatus,
-
-// const statuses = [];
-// if (isLoading) {
-//   //status ==="pending" && fetchStatus ==="fetching"
-//   // данныъ нет пошла загрузка
-//   console.log("==> isLoading", status, fetchStatus);
-//   statuses.push(<p key="isLoading">Загрузка</p>);
-//   // return <p>загрузка</p>;
-// }
-
-// if (isFetching) {
-//   // идет загрузка
-//   //fetchStatus ==="fetching"
-//   console.log("==> isFetching", status, fetchStatus);
-//   statuses.push(<p key="isFetching">Идут запросы</p>);
-//   // return <p>Идут запросы</p>;
-// }
-
-// if (isPending) {
-//   //данных нет
-//   //status ==="pending"
-//   console.log("==> isPending", status, fetchStatus);
-//   statuses.push(<p key="isPending">Данные ожидаются</p>);
-//   // return <p>Данные ожидаются</p>;
-// }
-
-// if (statuses.length) {
-//   return statuses;
-// }

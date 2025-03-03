@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getUsers, IUserDto } from "../api/users";
 import classNames from "classnames";
 import { useCallback, useRef } from "react";
+import { getUsersInfinity } from "../queries/users";
+import { UserListItem } from "./common/UserListItem";
 
 export const UserListInfinity = () => {
-  // сделать запрос на показ всех и пример посмотре с isFetching
   const {
     data: users,
     isFetching,
@@ -12,12 +12,7 @@ export const UserListInfinity = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["users-infinity"],
-    queryFn: ({ signal, pageParam }) =>
-      getUsers({ page: pageParam }, { signal }),
-    initialPageParam: 1,
-    getNextPageParam: (result) => result.next,
-    select: (result) => result.pages.map((page) => page.data).flat(),
+    ...getUsersInfinity(),
   });
 
   const cursorRef = useIntersection(fetchNextPage);
@@ -49,15 +44,6 @@ export const UserListInfinity = () => {
         </div>
       </ul>
     </section>
-  );
-};
-
-const UserListItem = ({ data }: { data: IUserDto }) => {
-  return (
-    <div className="flex gap-2 border border-blue-100 rounded p-1">
-      <span>{data.age}</span>
-      <span>{data.firstName}</span>
-    </div>
   );
 };
 
