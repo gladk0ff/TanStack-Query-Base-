@@ -36,7 +36,6 @@ export const UserList = () => {
     <section>
       <div className="flex gap-2 justify-between align-middle">
         <div className="flex gap-2">
-          <button className={btnAcions}>Добавить котика</button>
           <button onClick={() => setLoadAll(!isLoadAll)} className={btnAcions}>
             {isLoadAll ? "Включить пагинацю" : "Загрузить всех"}
           </button>

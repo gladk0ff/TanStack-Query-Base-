@@ -6,7 +6,7 @@ class ApiError extends Error {
   }
 }
 
-export const jsonFetch = async <T>(url: string, initial: RequestInit) => {
+export const fetchClient = async <T>(url: string, initial: RequestInit) => {
   const response = await fetch(`${BASE_URL}${url}`, {
     ...initial,
   });

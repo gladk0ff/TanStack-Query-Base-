@@ -4,12 +4,12 @@ import {
   queryOptions,
 } from "@tanstack/react-query";
 import { INITIAL_ALL_DATA } from "./initialData";
-import { jsonFetch } from "./client";
+import { fetchClient } from "./client";
 import { IPagination } from "../types";
 
 export interface IUserDto {
   id: string;
-  age: string;
+  age: number;
   firstName: string;
 }
 
@@ -17,7 +17,7 @@ export const getUsersInfinity = () => {
   return infiniteQueryOptions({
     queryKey: ["users-infinity"],
     queryFn: ({ signal, pageParam }) =>
-      jsonFetch<IPagination<IUserDto>>(
+      fetchClient<IPagination<IUserDto>>(
         `/users?_page=${pageParam}&_per_page=10`,
         { signal }
       ),
@@ -33,7 +33,7 @@ export const getUsersWithPagination = (page: number, isEnabled: boolean) => {
     // gcTime: 1000,
     queryKey: ["users", page],
     queryFn: ({ queryKey, signal }) =>
-      jsonFetch<IPagination<IUserDto>>(
+      fetchClient<IPagination<IUserDto>>(
         `/users?_page=${queryKey[1]}&_per_page=10`,
         { signal }
       ),
@@ -48,8 +48,37 @@ export const getUsersWithPagination = (page: number, isEnabled: boolean) => {
 export const getUsersAll = (isEnabled: boolean) => {
   return queryOptions({
     queryKey: ["users-all"],
-    queryFn: (meta) => jsonFetch("/users", meta),
+    queryFn: (meta) => fetchClient("/users", meta),
     enabled: isEnabled,
     initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
+  });
+};
+
+export const createUser = async (newUser: {
+  firstName: string;
+  age: number;
+}) => {
+  fetchClient<IUserDto>("/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  });
+};
+
+export const updateUser = async (user: IUserDto) => {
+  fetchClient<IUserDto>(`/users/${user.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+};
+
+export const deleteUser = async (id: string) => {
+  fetchClient(`/users/${id}`, {
+    method: "DELETE",
   });
 };

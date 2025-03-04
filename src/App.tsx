@@ -4,6 +4,7 @@ import { UserList } from "./components/UserList";
 import { NavLink, Route, Routes } from "react-router";
 import { UserListInfinity } from "./components/UserListInfinity";
 import classNames from "classnames";
+import { UserForm } from "./components/UserForm";
 
 function App() {
   const linkCls = "font-medium   hover:underline";
@@ -27,7 +28,10 @@ function App() {
           Бесконечная загрузка
         </NavLink>
       </nav>
-      <h1 className="text-3xl">Пользователи</h1>
+      <div className="flex justify-between">
+        <h1 className="text-3xl">Пользователи</h1>
+        <UserForm />
+      </div>
 
       <Routes>
         <Route element={<UserList />} path="/" />
