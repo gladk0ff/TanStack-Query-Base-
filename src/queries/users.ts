@@ -54,7 +54,11 @@ const getUsersAll = (isEnabled: boolean) => {
   });
 };
 
-const createUser = async (newUser: { firstName: string; age: number }) => {
+const createUser = async (newUser: {
+  id: string;
+  firstName: string;
+  age: number;
+}) => {
   fetchClient<IUserDto>("/users", {
     method: "POST",
     headers: {
