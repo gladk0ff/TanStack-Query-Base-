@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useCallback, useRef } from "react";
-import { getUsersInfinity } from "../queries/users";
+import { usersQueries } from "../queries/users";
 import { UserListItem } from "./common/UserListItem";
 
 export const UserListInfinity = () => {
@@ -12,7 +12,7 @@ export const UserListInfinity = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    ...getUsersInfinity(),
+    ...usersQueries.getUsersInfinity(),
   });
 
   const cursorRef = useIntersection(fetchNextPage);

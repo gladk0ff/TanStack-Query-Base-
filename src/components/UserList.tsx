@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import classNames from "classnames";
-import { getUsersAll, getUsersWithPagination } from "../queries/users";
+import { usersQueries } from "../queries/users";
 import { UserListItem } from "./common/UserListItem";
 
 export const UserList = () => {
@@ -14,11 +14,11 @@ export const UserList = () => {
     isLoading,
     isPlaceholderData,
   } = useQuery({
-    ...getUsersWithPagination(page, !isLoadAll),
+    ...usersQueries.getUsersWithPagination(page, !isLoadAll),
   });
 
   const { data: usersAll } = useQuery({
-    ...getUsersAll(isLoadAll),
+    ...usersQueries.getUsersAll(isLoadAll),
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";

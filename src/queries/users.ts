@@ -13,7 +13,7 @@ export interface IUserDto {
   firstName: string;
 }
 
-export const getUsersInfinity = () => {
+const getUsersInfinity = () => {
   return infiniteQueryOptions({
     queryKey: ["users-infinity"],
     queryFn: ({ signal, pageParam }) =>
@@ -27,7 +27,7 @@ export const getUsersInfinity = () => {
   });
 };
 
-export const getUsersWithPagination = (page: number, isEnabled: boolean) => {
+const getUsersWithPagination = (page: number, isEnabled: boolean) => {
   return queryOptions({
     // staleTime: Infinity,
     // gcTime: 1000,
@@ -45,7 +45,7 @@ export const getUsersWithPagination = (page: number, isEnabled: boolean) => {
   });
 };
 
-export const getUsersAll = (isEnabled: boolean) => {
+const getUsersAll = (isEnabled: boolean) => {
   return queryOptions({
     queryKey: ["users-all"],
     queryFn: (meta) => fetchClient("/users", meta),
@@ -54,10 +54,7 @@ export const getUsersAll = (isEnabled: boolean) => {
   });
 };
 
-export const createUser = async (newUser: {
-  firstName: string;
-  age: number;
-}) => {
+const createUser = async (newUser: { firstName: string; age: number }) => {
   fetchClient<IUserDto>("/users", {
     method: "POST",
     headers: {
@@ -67,7 +64,7 @@ export const createUser = async (newUser: {
   });
 };
 
-export const updateUser = async (user: IUserDto) => {
+const updateUser = async (user: IUserDto) => {
   fetchClient<IUserDto>(`/users/${user.id}`, {
     method: "PATCH",
     headers: {
@@ -77,8 +74,17 @@ export const updateUser = async (user: IUserDto) => {
   });
 };
 
-export const deleteUser = async (id: string) => {
+const deleteUser = async (id: string) => {
   fetchClient(`/users/${id}`, {
     method: "DELETE",
   });
+};
+
+export const usersQueries = {
+  getUsersInfinity,
+  getUsersWithPagination,
+  getUsersAll,
+  createUser,
+  updateUser,
+  deleteUser,
 };

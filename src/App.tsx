@@ -28,7 +28,7 @@ function App() {
           Бесконечная загрузка
         </NavLink>
       </nav>
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-3">
         <h1 className="text-3xl">Пользователи</h1>
         <UserForm />
       </div>
