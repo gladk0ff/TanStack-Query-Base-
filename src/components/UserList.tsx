@@ -3,6 +3,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { usersQueries } from "../queries/users";
 import { UserListItem } from "./common/UserListItem";
+import { UserForm } from "./UserForm";
 
 export const UserList = () => {
   const [page, setPage] = useState(1);
@@ -13,6 +14,7 @@ export const UserList = () => {
     error,
     isLoading,
     isPlaceholderData,
+    // refetch,
   } = useQuery({
     ...usersQueries.getUsersWithPagination(page, !isLoadAll),
   });
@@ -34,6 +36,7 @@ export const UserList = () => {
 
   return (
     <section>
+      {/* <UserForm refetch={refetch} /> */}
       <div className="flex gap-2 justify-between align-middle">
         <div className="flex gap-2">
           <button onClick={() => setLoadAll(!isLoadAll)} className={btnAcions}>

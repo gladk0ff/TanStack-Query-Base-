@@ -4,7 +4,7 @@ import {
   queryOptions,
 } from "@tanstack/react-query";
 import { INITIAL_ALL_DATA } from "./initialData";
-import { fetchClient } from "./client";
+import { fetchClient } from "./fetchClient";
 import { IPagination } from "../types";
 
 export interface IUserDto {
@@ -13,6 +13,10 @@ export interface IUserDto {
   firstName: string;
   dateCrated?: string;
 }
+
+export const QUERY_KEYS = {
+  users: "users",
+};
 
 const getUsersInfinity = () => {
   return infiniteQueryOptions({
@@ -28,14 +32,17 @@ const getUsersInfinity = () => {
   });
 };
 
-const getUsersWithPagination = (page: number, isEnabled: boolean) => {
+const getUsersWithPagination = (
+  page: number = 1,
+  isEnabled: boolean = true
+) => {
   return queryOptions({
     // staleTime: Infinity,
     // gcTime: 1000,
-    queryKey: ["users", page],
+    queryKey: [QUERY_KEYS.users, page],
     queryFn: ({ queryKey, signal }) =>
       fetchClient<IPagination<IUserDto>>(
-        `/users?_sort=dateCrated&_order=desc&_page=${queryKey[1]}&_per_page=10`,
+        `/users?_sort=dateCrated&_order=asc&_page=${queryKey[1]}&_per_page=10`,
         { signal }
       ),
     placeholderData: keepPreviousData, // так же можно задать и функцию
@@ -65,7 +72,7 @@ const createUser = async (newUser: {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ ...newUser, dateCrated: new Date().toISOString() }),
+    body: JSON.stringify({ ...newUser, dateCrated: new Date() }),
   });
 };
 
