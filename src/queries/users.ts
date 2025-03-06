@@ -11,6 +11,7 @@ export interface IUserDto {
   id: string;
   age: number;
   firstName: string;
+  dateCrated?: string;
 }
 
 const getUsersInfinity = () => {
@@ -34,7 +35,7 @@ const getUsersWithPagination = (page: number, isEnabled: boolean) => {
     queryKey: ["users", page],
     queryFn: ({ queryKey, signal }) =>
       fetchClient<IPagination<IUserDto>>(
-        `/users?_page=${queryKey[1]}&_per_page=10`,
+        `/users?_sort=dateCrated&_order=desc&_page=${queryKey[1]}&_per_page=10`,
         { signal }
       ),
     placeholderData: keepPreviousData, // так же можно задать и функцию
@@ -64,7 +65,7 @@ const createUser = async (newUser: {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(newUser),
+    body: JSON.stringify({ ...newUser, dateCrated: new Date().toISOString() }),
   });
 };
 
