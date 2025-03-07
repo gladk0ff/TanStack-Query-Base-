@@ -62,21 +62,16 @@ const getUsersAll = (isEnabled: boolean) => {
   });
 };
 
-const createUser = async (newUser: {
-  id: string;
-  firstName: string;
-  age: number;
-}) => {
-  fetchClient<IUserDto>("/users", {
+const createUser = (newUser: { id: string; firstName: string; age: number }) =>
+  fetchClient<IUserDto>("/users123", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ ...newUser, dateCrated: new Date() }),
   });
-};
 
-const updateUser = async (user: IUserDto) => {
+const updateUser = (user: IUserDto) =>
   fetchClient<IUserDto>(`/users/${user.id}`, {
     method: "PATCH",
     headers: {
@@ -84,13 +79,11 @@ const updateUser = async (user: IUserDto) => {
     },
     body: JSON.stringify(user),
   });
-};
 
-const deleteUser = async (id: string) => {
+const deleteUser = (id: string) =>
   fetchClient(`/users/${id}`, {
     method: "DELETE",
   });
-};
 
 export const usersQueries = {
   getUsersInfinity,

@@ -12,7 +12,9 @@ export const fetchClient = async <T>(url: string, initial: RequestInit) => {
   });
 
   if (!response.ok) {
-    throw new ApiError(response);
+    console.log("fetchClient error", response);
+    // throw new ApiError(response);
+    throw new Error("Ошибка");
   }
 
   return (await response.json()) as Promise<T>;

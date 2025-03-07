@@ -3499,30 +3499,6 @@
         "network": "Ethereum (ERC20)"
       },
       "role": "user"
-    },
-    {
-      "id": "3397c8a2-d591-43f9-ac0f-c9ea17324bb9",
-      "age": 1,
-      "firstName": "Тест",
-      "dateCrated": "2025-03-06T18:42:57.668Z"
-    },
-    {
-      "id": "ef963ea1-f55a-4689-95f8-2764addd5601",
-      "age": 2,
-      "firstName": "2Тест",
-      "dateCrated": "2025-03-06T18:43:57.132Z"
-    },
-    {
-      "id": "58497811-6e16-4acf-aad1-2c2ac996301d",
-      "age": 12,
-      "firstName": "3 Тест",
-      "dateCrated": "2025-03-06T18:44:13.035Z"
-    },
-    {
-      "id": "2e4ec9a2-5857-4bed-abad-74b51cfa561f",
-      "age": 22,
-      "firstName": "2dsf",
-      "dateCrated": "2025-03-06T18:46:39.941Z"
     }
   ]
 }

@@ -30,7 +30,7 @@ export const UserListInfinity = () => {
         className={classNames(
           "bacground-color-gray flex flex-col  gap-2 mt-4",
           isFetching && "opacity-50",
-          "overflow-y-auto max-h-80"
+          "overflow-y-auto max-h-70"
         )}
       >
         {users?.map((user) => (
@@ -38,10 +38,10 @@ export const UserListInfinity = () => {
             <UserListItem data={user} />
           </li>
         ))}
-        <div ref={cursorRef}>
+        <li ref={cursorRef}>
           {!hasNextPage && <span>Все загружено</span>}
           {isFetchingNextPage && <span>Загрузка ...</span>}
-        </div>
+        </li>
       </ul>
     </section>
   );
@@ -49,7 +49,7 @@ export const UserListInfinity = () => {
 
 function useIntersection(onIntersect: () => void) {
   const unsubscriber = useRef(() => {});
-  return useCallback((el: HTMLDivElement | null) => {
+  return useCallback((el: HTMLElement | null) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((intersection) => {
         if (intersection.isIntersecting) {
