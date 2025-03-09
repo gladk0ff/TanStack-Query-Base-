@@ -1,42 +1,54 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS, usersQueries } from "../queries/users";
+import classNames from "classnames";
 
-export const UserForm = ({ refetch }: { refetch?(): void }) => {
+const useCreateUser = () => {
   const queryClient = useQueryClient();
 
-  const createUserMutation = useMutation({
+  return useMutation({
     // mutationKey не обязателене если вы не хотите узнать статус мутации из другого компонента
     mutationFn: usersQueries.createUser,
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.users],
       }),
-    onError: (error, variables, context) => {
-      // An error happened!
-      console.log(`rolling back optimistic update with id ${context.id}`);
+    onError: (error) => {
+      // Обработка ошибки в мутации
+      console.log("Mutation error:", error);
     },
     onSettled: () => {
       console.log("onSettled");
     },
   });
+};
+
+export const UserForm = ({ refetch }: { refetch?(): void }) => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending, isError, error } = useCreateUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     //cинхронная не выбрасывает ошибки
-    createUserMutation.mutate(
+    mutate(
       {
         id: crypto.randomUUID(),
         age: Number(formData.get("age")),
         firstName: formData.get("firstName") as string,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.users],
+          });
+          // queryClient.invalidateQueries(usersQueries.getUsersWithPagination()),
+        },
+        onError: (error) => {
+          // локальная обработка ошибки в компоненте
+          console.log("mutate local error:", error);
+        },
       }
-      // {
-      //   onSuccess: () =>
-      //     queryClient.invalidateQueries({
-      //       queryKey: [QUERY_KEYS.users],
-      //     }),
-      //   // queryClient.invalidateQueries(usersQueries.getUsersWithPagination()),
-      // }
     );
 
     e.currentTarget.reset();
@@ -44,9 +56,7 @@ export const UserForm = ({ refetch }: { refetch?(): void }) => {
 
   return (
     <form className="flex gap-4" onSubmit={handleSubmit}>
-      {createUserMutation.isError ? (
-        <div>An error occurred: {createUserMutation.error.message}</div>
-      ) : null}
+      {isError ? <div> {error.message}</div> : null}
       <input
         required
         name="firstName"
@@ -61,7 +71,13 @@ export const UserForm = ({ refetch }: { refetch?(): void }) => {
         type="number"
         placeholder="Возраст"
       />
-      <button className="px-2 py-1  rounded cursor-pointer bg-green-200 hover:bg-green-400">
+      <button
+        disabled={isPending}
+        className={classNames(
+          "px-2 py-1 rounded cursor-pointer bg-green-200 hover:bg-green-400",
+          isPending && "opacity-50"
+        )}
+      >
         Добавить
       </button>
     </form>

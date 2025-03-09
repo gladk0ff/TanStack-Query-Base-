@@ -63,13 +63,17 @@ const getUsersAll = (isEnabled: boolean) => {
 };
 
 const createUser = (newUser: { id: string; firstName: string; age: number }) =>
-  fetchClient<IUserDto>("/users123", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  fetchClient<IUserDto>(
+    "/users123",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...newUser, dateCrated: new Date() }),
     },
-    body: JSON.stringify({ ...newUser, dateCrated: new Date() }),
-  });
+    "Нe удалось создать пользователя"
+  );
 
 const updateUser = (user: IUserDto) =>
   fetchClient<IUserDto>(`/users/${user.id}`, {
