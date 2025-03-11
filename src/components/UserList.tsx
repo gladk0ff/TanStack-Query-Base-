@@ -3,7 +3,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { usersQueries } from "../queries/users";
 import { UserListItem } from "./common/UserListItem";
-import { UserForm } from "./UserForm";
+import { UserForm } from "./UserForm/UserForm";
 
 export const UserList = () => {
   const [page, setPage] = useState(1);

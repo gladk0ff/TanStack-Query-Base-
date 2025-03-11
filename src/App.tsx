@@ -4,7 +4,7 @@ import { UserList } from "./components/UserList";
 import { NavLink, Route, Routes } from "react-router";
 import { UserListInfinity } from "./components/UserListInfinity";
 import classNames from "classnames";
-import { UserForm } from "./components/UserForm";
+import { UserForm } from "./components/UserForm/UserForm";
 
 function App() {
   const linkCls = "font-medium   hover:underline";

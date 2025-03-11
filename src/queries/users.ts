@@ -64,7 +64,7 @@ const getUsersAll = (isEnabled: boolean) => {
 
 const createUser = (newUser: { id: string; firstName: string; age: number }) =>
   fetchClient<IUserDto>(
-    "/users123",
+    "/users",
     {
       method: "POST",
       headers: {

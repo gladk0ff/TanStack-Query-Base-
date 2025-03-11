@@ -38,7 +38,7 @@ export const UserListInfinity = () => {
             <UserListItem data={user} />
           </li>
         ))}
-        <li ref={cursorRef}>
+        <li ref={cursorRef} className="min-h-2">
           {!hasNextPage && <span>Все загружено</span>}
           {isFetchingNextPage && <span>Загрузка ...</span>}
         </li>
