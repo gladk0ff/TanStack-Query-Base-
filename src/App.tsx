@@ -1,6 +1,6 @@
 // import { useState } from "react";
 // import { UserForm } from "./components/UserForm";
-import { UserList } from "./components/UserList";
+import { UserList } from "./components/UserList/UserList";
 import { NavLink, Route, Routes } from "react-router";
 import { UserListInfinity } from "./components/UserListInfinity";
 import classNames from "classnames";

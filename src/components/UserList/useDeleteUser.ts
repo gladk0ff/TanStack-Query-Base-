@@ -1,22 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usersQueries, QUERY_KEYS } from "../../queries/users";
 
-export const useDeleteUser = (id: string) => {
+export const useDeleteUser = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const userDeleteMuatation = useMutation({
     // mutationKey не обязателене если вы не хотите узнать статус мутации из другого компонента
-    mutationFn: () => usersQueries.deleteUser(id),
-    onSuccess: async () =>
+    mutationFn: usersQueries.deleteUser,
+    onSuccess: async (_, deleteId) => {
+      queryClient.getQueriesData([QUERY_KEYS.users]);
+    },
+    onSettled: async () =>
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.users],
       }),
-    onError: (error) => {
-      // Обработка ошибки в мутации
-      console.log("Mutation error:", error);
-    },
-    onSettled: async () => {
-      console.log("onSettled");
-    },
   });
+
+  return {
+    onDelete: userDeleteMuatation.mutate,
+    isPending: userDeleteMuatation.isPending,
+  };
 };
