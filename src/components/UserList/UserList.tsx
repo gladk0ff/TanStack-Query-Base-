@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { usersQueries } from "../../queries/users";
 import { UserListItem } from "../common/UserListItem";
 import { UserForm } from "../UserForm/UserForm";
-import { useDeleteUser } from "./useDeleteUser";
+import { useDeleteUserFromPage } from "./useDeleteUser";
 
 export const UserList = () => {
   const [page, setPage] = useState(1);
@@ -24,7 +24,7 @@ export const UserList = () => {
     ...usersQueries.getUsersAll(isLoadAll),
   });
 
-  const { isPending, onDelete } = useDeleteUser();
+  const { isPending, onDelete } = useDeleteUserFromPage(page);
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
   const btnAcions = btnClass + "bg-blue-200 hover:bg-blue-400";

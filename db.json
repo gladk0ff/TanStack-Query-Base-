@@ -1,76 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "Emily",
-      "lastName": "Johnson",
-      "maidenName": "Smith",
-      "age": 28,
-      "gender": "female",
-      "email": "emily.johnson@x.dummyjson.com",
-      "phone": "+81 965-431-3024",
-      "username": "emilys",
-      "password": "emilyspass",
-      "birthDate": "1996-5-30",
-      "image": "https://dummyjson.com/icon/emilys/128",
-      "bloodGroup": "O-",
-      "height": 193.24,
-      "weight": 63.16,
-      "eyeColor": "Green",
-      "hair": {
-        "color": "Brown",
-        "type": "Curly"
-      },
-      "ip": "42.48.100.32",
-      "address": {
-        "address": "626 Main Street",
-        "city": "Phoenix",
-        "state": "Mississippi",
-        "stateCode": "MS",
-        "postalCode": "29112",
-        "coordinates": {
-          "lat": -77.16213,
-          "lng": -92.084824
-        },
-        "country": "United States"
-      },
-      "macAddress": "47:fa:41:18:ec:eb",
-      "university": "University of Wisconsin--Madison",
-      "bank": {
-        "cardExpire": "03/26",
-        "cardNumber": "9289760655481815",
-        "cardType": "Elo",
-        "currency": "CNY",
-        "iban": "YPUXISOBI7TTHPK2BR3HAIXL"
-      },
-      "company": {
-        "department": "Engineering",
-        "name": "Dooley, Kozey and Cronin",
-        "title": "Sales Manager",
-        "address": {
-          "address": "263 Tenth Street",
-          "city": "San Francisco",
-          "state": "Wisconsin",
-          "stateCode": "WI",
-          "postalCode": "37657",
-          "coordinates": {
-            "lat": 71.814525,
-            "lng": -161.150263
-          },
-          "country": "United States"
-        }
-      },
-      "ein": "977-175",
-      "ssn": "900-590-289",
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
-      "crypto": {
-        "coin": "Bitcoin",
-        "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
-        "network": "Ethereum (ERC20)"
-      },
-      "role": "admin"
-    },
-    {
       "id": "2",
       "firstName": "Michael",
       "lastName": "Williams",
@@ -833,76 +763,6 @@
       "ein": "754-660",
       "ssn": "749-524-124",
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36",
-      "crypto": {
-        "coin": "Bitcoin",
-        "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
-        "network": "Ethereum (ERC20)"
-      },
-      "role": "moderator"
-    },
-    {
-      "id": "13",
-      "firstName": "Noah",
-      "lastName": "Hernandez",
-      "maidenName": "",
-      "age": 40,
-      "gender": "male",
-      "email": "noah.hernandez@x.dummyjson.com",
-      "phone": "+49 393-605-6968",
-      "username": "noahh",
-      "password": "noahhpass",
-      "birthDate": "1984-6-5",
-      "image": "https://dummyjson.com/icon/noahh/128",
-      "bloodGroup": "AB+",
-      "height": 188.62,
-      "weight": 69.49,
-      "eyeColor": "Brown",
-      "hair": {
-        "color": "Red",
-        "type": "Curly"
-      },
-      "ip": "169.154.126.57",
-      "address": {
-        "address": "1413 Maple Street",
-        "city": "New York",
-        "state": "North Dakota",
-        "stateCode": "ND",
-        "postalCode": "73696",
-        "coordinates": {
-          "lat": -25.0377,
-          "lng": -151.70469
-        },
-        "country": "United States"
-      },
-      "macAddress": "d4:fe:ae:8f:eb:a3",
-      "university": "New York University (NYU)",
-      "bank": {
-        "cardExpire": "05/26",
-        "cardNumber": "1681772579326385",
-        "cardType": "Discover",
-        "currency": "SEK",
-        "iban": "G4UIZKIQVPJM9D31XQVR1E9Z"
-      },
-      "company": {
-        "department": "Engineering",
-        "name": "Botsford, Marquardt and Roberts",
-        "title": "Database Administrator",
-        "address": {
-          "address": "62 Third Street",
-          "city": "Seattle",
-          "state": "Oregon",
-          "stateCode": "OR",
-          "postalCode": "83474",
-          "coordinates": {
-            "lat": 19.490447,
-            "lng": -13.173207
-          },
-          "country": "United States"
-        }
-      },
-      "ein": "877-628",
-      "ssn": "660-847-389",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36",
       "crypto": {
         "coin": "Bitcoin",
         "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
@@ -1953,76 +1813,6 @@
       "ein": "229-776",
       "ssn": "358-185-671",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/97.0.1072.76 Safari/537.36",
-      "crypto": {
-        "coin": "Bitcoin",
-        "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
-        "network": "Ethereum (ERC20)"
-      },
-      "role": "user"
-    },
-    {
-      "id": "29",
-      "firstName": "Henry",
-      "lastName": "Hill",
-      "maidenName": "",
-      "age": 38,
-      "gender": "male",
-      "email": "henry.hill@x.dummyjson.com",
-      "phone": "+1 240-833-4680",
-      "username": "henryh",
-      "password": "henryhpass",
-      "birthDate": "1986-8-19",
-      "image": "https://dummyjson.com/icon/henryh/128",
-      "bloodGroup": "O-",
-      "height": 180.25,
-      "weight": 95.84,
-      "eyeColor": "Gray",
-      "hair": {
-        "color": "Black",
-        "type": "Straight"
-      },
-      "ip": "194.43.55.202",
-      "address": {
-        "address": "1837 Maple Street",
-        "city": "Indianapolis",
-        "state": "Delaware",
-        "stateCode": "DE",
-        "postalCode": "81783",
-        "coordinates": {
-          "lat": 35.498256,
-          "lng": 154.088476
-        },
-        "country": "United States"
-      },
-      "macAddress": "fa:c3:1b:21:5f:44",
-      "university": "University of Illinois--Urbana-Champaign",
-      "bank": {
-        "cardExpire": "02/26",
-        "cardNumber": "7262597174206766",
-        "cardType": "Diners Club International",
-        "currency": "SEK",
-        "iban": "7N3JP8KN9AUNXOWRQGAU2JX6"
-      },
-      "company": {
-        "department": "Services",
-        "name": "Gerlach, Funk and Schoen",
-        "title": "Sales Manager",
-        "address": {
-          "address": "1651 Lincoln Street",
-          "city": "San Francisco",
-          "state": "West Virginia",
-          "stateCode": "WV",
-          "postalCode": "61805",
-          "coordinates": {
-            "lat": -59.936335,
-            "lng": -12.405368
-          },
-          "country": "United States"
-        }
-      },
-      "ein": "118-957",
-      "ssn": "925-686-100",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
       "crypto": {
         "coin": "Bitcoin",
         "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
@@ -3499,36 +3289,6 @@
         "network": "Ethereum (ERC20)"
       },
       "role": "user"
-    },
-    {
-      "id": "9c5d789b-4cde-4a90-9681-c537ff750759",
-      "age": 123,
-      "firstName": "asda",
-      "dateCrated": "2025-03-11T08:23:13.864Z"
-    },
-    {
-      "id": "5247d336-66a7-491b-bf6c-aec271bb540f",
-      "age": 22,
-      "firstName": "123",
-      "dateCrated": "2025-03-11T08:23:30.342Z"
-    },
-    {
-      "id": "8f1d6134-9210-4bea-b71b-fc58a77e531a",
-      "age": 12,
-      "firstName": "Ntcn",
-      "dateCrated": "2025-03-11T08:24:36.361Z"
-    },
-    {
-      "id": "24332cae-e859-4071-b270-be65c6ffe22b",
-      "age": 1,
-      "firstName": "Тест",
-      "dateCrated": "2025-03-11T08:25:00.751Z"
-    },
-    {
-      "id": "58867132-c515-44fb-b986-feca73ac216f",
-      "age": 1,
-      "firstName": "a1",
-      "dateCrated": "2025-03-11T08:25:43.056Z"
     }
   ]
 }
