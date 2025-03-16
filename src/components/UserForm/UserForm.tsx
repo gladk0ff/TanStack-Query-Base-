@@ -18,13 +18,21 @@ export const UserForm = ({ refetch }: { refetch?(): void }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+
     //cинхронная не выбрасывает ошибки
-    mutate({
-      id: crypto.randomUUID(),
-      age: Number(formData.get("age")),
-      firstName: formData.get("firstName") as string,
-    });
-    e.currentTarget.reset();
+    mutate(
+      {
+        id: crypto.randomUUID(),
+        age: Number(formData.get("age")),
+        firstName: formData.get("firstName") as string,
+      },
+      {
+        onSuccess: async () => {
+          form.reset();
+        },
+      }
+    );
   };
 
   return (

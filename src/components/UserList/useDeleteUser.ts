@@ -13,8 +13,6 @@ export const useDeleteUserFromPage = (page: number) => {
         page,
       ]);
 
-      console.log("userData", userData);
-
       if (userData?.data) {
         queryClient.setQueryData(
           [QUERY_KEYS.users, page],
@@ -27,10 +25,10 @@ export const useDeleteUserFromPage = (page: number) => {
         );
       }
     },
-    // onSettled: async () =>
-    //   await queryClient.invalidateQueries({
-    //     queryKey: [QUERY_KEYS.users],
-    //   }),
+    onSettled: async () =>
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.users],
+      }),
   });
 
   return {

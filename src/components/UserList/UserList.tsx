@@ -37,6 +37,8 @@ export const UserList = () => {
 
   const usersData = isLoadAll ? usersAll : users?.data;
 
+  console.log("isPending", isPending);
+
   return (
     <section>
       {/* <UserForm refetch={refetch} /> */}

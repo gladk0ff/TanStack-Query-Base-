@@ -12,19 +12,16 @@ export const UserListItem = ({
   isDeletePending: boolean;
 }) => {
   return (
-    <div
-      className={classNames(
-        "flex gap-2 border border-blue-100 rounded p-1",
-        isDeletePending && "opacity-10"
-      )}
-    >
+    <div className="flex gap-2 border border-blue-100 rounded p-1">
       <span>{data.age}</span>
       <span>{data.firstName}</span>
-      <img
+      <button
+        disabled={isDeletePending}
+        className="w-6  ml-auto opacity-40 hover:opacity-80 cursor-pointer disabled:opacity-10 disabled:cursor-not-allowed"
         onClick={() => onDelete(data.id)}
-        className="w-6  ml-auto opacity-10 hover:opacity-60 cursor-pointer"
-        src={DeleteIcon}
-      />
+      >
+        <img src={DeleteIcon} />
+      </button>
     </div>
   );
 };
