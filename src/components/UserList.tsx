@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getAllUsers, getUsers, IUserDto } from "../api/users";
-import { useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
 // import { IPagination } from "../types";
@@ -17,23 +17,27 @@ export const UserList = () => {
   const {
     data: users,
     error,
-    isLoading,
+    // isLoading,
     isPlaceholderData,
+    isPending,
+    isFetching,
+    isLoading,
+    status,
+    fetchStatus,
   } = useQuery({
-    // ...getUsersWithPagination(page, isLoadAll),
-    // // staleTime: Infinity,
-    // gcTime: 1000,
     queryKey: ["users", page],
     queryFn: ({ queryKey, signal }) =>
       getUsers({ page: queryKey[1] as number }, { signal }),
+    // retry: 3, // почему +1 запрос - первый не считается,
+    // retryDelay: 1000, // как часто
+    // staleTime: Infinity,
+    // gcTime: 1000,
     // так же можно задать и функцию
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
     // наполняет кеш  запроса из другого источника (localeStorage,somedata)
     // очень полезен для ssr
-    // когда есть флаг isPlaceholderData не срабатывает
-    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
+    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,// когда есть флаг isPlaceholderData не срабатывает
     // enabled: isLoadAll,
-    // ...getUsersWithPagination(page, isLoadAll),
   });
 
   // console.log("==>", status, fetchStatus);
@@ -44,7 +48,6 @@ export const UserList = () => {
     queryFn: (meta) => getAllUsers(meta),
     enabled: isLoadAll,
     initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
-    // ...getUsersAll(isLoadAll),
   });
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
@@ -53,7 +56,27 @@ export const UserList = () => {
   const btnDis = "disabled:pointer-events-none disabled:opacity-20";
 
   if (error) {
-    return <div>{JSON.stringify(error)}</div>;
+    console.log("error", error);
+
+    return <div>ОШИБКА:{error.message}</div>;
+  }
+
+  if (isPending) {
+    //данных нет
+    //status ==="pending"
+    console.log("==> isPending: Данные ожидаются", status, fetchStatus);
+  }
+
+  if (isFetching) {
+    // идет загрузка
+    //fetchStatus ==="fetching"
+    console.log("==> isFetching : Идут запросы", status, fetchStatus);
+  }
+
+  if (isLoading) {
+    //status ==="pending" && fetchStatus ==="fetching"
+    // данныъ нет пошла загрузка
+    console.log("==> isLoading : Загрузка ", status, fetchStatus);
   }
 
   const usersData = isLoadAll ? usersAll : users?.data;
@@ -62,7 +85,6 @@ export const UserList = () => {
     <section>
       <div className="flex gap-2 justify-between align-middle">
         <div className="flex gap-2">
-          <button className={btnAcions}>Добавить котика</button>
           <button onClick={() => setLoadAll(!isLoadAll)} className={btnAcions}>
             {isLoadAll ? "Включить пагинацю" : "Загрузить всех"}
           </button>

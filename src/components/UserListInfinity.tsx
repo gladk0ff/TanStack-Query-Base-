@@ -4,7 +4,6 @@ import classNames from "classnames";
 import { useCallback, useRef } from "react";
 
 export const UserListInfinity = () => {
-  // сделать запрос на показ всех и пример посмотре с isFetching
   const {
     data: users,
     isFetching,

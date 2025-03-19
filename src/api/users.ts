@@ -12,9 +12,13 @@ export const getUsers = async (
   { page }: { page: number },
   { signal }: { signal: AbortSignal }
 ): Promise<IPagination<IUserDto>> => {
-  return fetch(`${BASE_URL}/users?_page=${page}&_per_page=10`, { signal }).then(
-    (res) => res.json()
-  );
+  return fetch(`${BASE_URL}/users?_page=${page}&_per_page=10`, {
+    signal,
+  })
+    .then((res) => res.json())
+    .catch(() => {
+      throw new Error(`Не удалось загрузить страницу:${page} с пользователям`);
+    });
 };
 
 export const getAllUsers = async ({
