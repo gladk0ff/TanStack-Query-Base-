@@ -3,6 +3,7 @@ import { getAllUsers, getUsers, IUserDto } from "../api/users";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { INITIAL_ALL_DATA, INITIAL_DATA } from "./initialData";
+import { IPagination } from "../types";
 // import { IPagination } from "../types";
 // import { getUsersAll, getUsersWithPagination } from "../queries/users";
 // import { getUsersWithPagination } from "../queries/users";
@@ -17,7 +18,6 @@ export const UserList = () => {
   const {
     data: users,
     error,
-    // isLoading,
     isPlaceholderData,
     isPending,
     isFetching,
@@ -31,12 +31,12 @@ export const UserList = () => {
     // retry: 3, // почему +1 запрос - первый не считается,
     // retryDelay: 1000, // как часто
     // staleTime: Infinity,
-    // gcTime: 1000,
+    // gcTime: 0,
     // так же можно задать и функцию
     // placeholderData: keepPreviousData,
     // наполняет кеш  запроса из другого источника (localeStorage,somedata)
     // очень полезен для ssr
-    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,// когда есть флаг isPlaceholderData не срабатывает
+    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>, // когда есть флаг isPlaceholderData не срабатывает
     // enabled: isLoadAll,
   });
 
@@ -59,24 +59,6 @@ export const UserList = () => {
     console.log("error", error);
 
     return <div>ОШИБКА:{error.message}</div>;
-  }
-
-  if (isPending) {
-    //данных нет
-    //status ==="pending"
-    console.log("==> isPending: Данные ожидаются", status, fetchStatus);
-  }
-
-  if (isFetching) {
-    // идет загрузка
-    //fetchStatus ==="fetching"
-    console.log("==> isFetching : Идут запросы", status, fetchStatus);
-  }
-
-  if (isLoading) {
-    //status ==="pending" && fetchStatus ==="fetching"
-    // данныъ нет пошла загрузка
-    console.log("==> isLoading : Загрузка ", status, fetchStatus);
   }
 
   const usersData = isLoadAll ? usersAll : users?.data;
@@ -102,7 +84,7 @@ export const UserList = () => {
               {"<<"} Пред
             </button>
             <button
-              disabled={page === users?.pages}
+              disabled={page === users?.last}
               onClick={() => setPage((p) => Math.min(++p, users?.pages || 1))}
               className={classNames(btnPg, page === users?.pages && btnDis)}
             >
@@ -112,12 +94,12 @@ export const UserList = () => {
         )}
       </div>
 
-      {isLoading && <p>Загрузка</p>}
+      {isLoading && <p>Загрузка...</p>}
 
       <ul
         className={classNames(
           "bacground-color-gray flex flex-col  gap-2 mt-4",
-          isPlaceholderData && "opacity-50",
+          (isPlaceholderData || isFetching) && "opacity-50",
           "overflow-y-auto max-h-110"
         )}
       >
@@ -140,38 +122,21 @@ const UserListItem = ({ data }: { data: IUserDto }) => {
   );
 };
 
-// ПРО СТАТУСЫ
-// isPending,
-// isFetching,
-// isLoading,
-// status,
-// fetchStatus,
-
-// const statuses = [];
-// if (isLoading) {
-//   //status ==="pending" && fetchStatus ==="fetching"
-//   // данныъ нет пошла загрузка
-//   console.log("==> isLoading", status, fetchStatus);
-//   statuses.push(<p key="isLoading">Загрузка</p>);
-//   // return <p>загрузка</p>;
+// if (isPending) {
+//   //status ==="pending"
+//   console.log("==> isPending: данных нет", status);
 // }
 
 // if (isFetching) {
-//   // идет загрузка
 //   //fetchStatus ==="fetching"
-//   console.log("==> isFetching", status, fetchStatus);
-//   statuses.push(<p key="isFetching">Идут запросы</p>);
-//   // return <p>Идут запросы</p>;
+//   console.log("==> isFetching: идет загрузка", fetchStatus);
 // }
 
-// if (isPending) {
-//   //данных нет
-//   //status ==="pending"
-//   console.log("==> isPending", status, fetchStatus);
-//   statuses.push(<p key="isPending">Данные ожидаются</p>);
-//   // return <p>Данные ожидаются</p>;
-// }
-
-// if (statuses.length) {
-//   return statuses;
+// if (isLoading) {
+//   //status ==="pending" && fetchStatus ==="fetching"
+//   console.log(
+//     "==> isLoading: данных нет пошла загрузка ",
+//     status,
+//     fetchStatus
+//   );
 // }

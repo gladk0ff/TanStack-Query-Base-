@@ -21,15 +21,8 @@ export const UserListInfinity = () => {
 
   const cursorRef = useIntersection(fetchNextPage);
 
-  const btnClass = "px-2 py-1  rounded cursor-pointer ";
-  const btnAcions = btnClass + "bg-blue-200 hover:bg-blue-400";
-
   return (
     <section>
-      <div className="flex gap-2 justify-between align-middle">
-        <button className={btnAcions}>Добавить котика</button>
-      </div>
-
       <ul
         className={classNames(
           "bacground-color-gray flex flex-col  gap-2 mt-4",
@@ -42,7 +35,7 @@ export const UserListInfinity = () => {
             <UserListItem data={user} />
           </li>
         ))}
-        <div ref={cursorRef}>
+        <div ref={cursorRef} className="min-h-2 flex">
           {!hasNextPage && <span>Все загружено</span>}
           {isFetchingNextPage && <span>Загрузка ...</span>}
         </div>

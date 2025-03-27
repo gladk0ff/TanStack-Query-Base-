@@ -26,6 +26,5 @@ export const getAllUsers = async ({
 }: {
   signal: AbortSignal;
 }): Promise<IUserDto[]> => {
-  // return fetch(`${BASE_URL}/users?_page=1&_per_page=10`, { signal }).then(
   return fetch(`${BASE_URL}/users`, { signal }).then((res) => res.json());
 };
