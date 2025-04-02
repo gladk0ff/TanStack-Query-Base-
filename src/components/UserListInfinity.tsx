@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useCallback, useRef } from "react";
 import { usersQueries } from "../queries/users";
-import { UserListItem } from "./common/UserListItem";
+import { UserListItem } from "./UserListItem";
 
 export const UserListInfinity = () => {
   const {
@@ -17,15 +17,8 @@ export const UserListInfinity = () => {
 
   const cursorRef = useIntersection(fetchNextPage);
 
-  const btnClass = "px-2 py-1  rounded cursor-pointer ";
-  const btnAcions = btnClass + "bg-blue-200 hover:bg-blue-400";
-
   return (
     <section>
-      <div className="flex gap-2 justify-between align-middle">
-        <button className={btnAcions}>Добавить котика</button>
-      </div>
-
       <ul
         className={classNames(
           "bacground-color-gray flex flex-col  gap-2 mt-4",

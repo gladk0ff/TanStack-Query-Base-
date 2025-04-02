@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS, usersQueries } from "../../queries/users";
+import { QUERY_KEYS, usersQueries } from "../queries/users";
 import classNames from "classnames";
 // import classNames from "classnames";
 
-export const UserForm = ({ refetch }: { refetch?(): void }) => {
+export const UserForm = () => {
   const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
-    // mutationKey не обязателене если вы не хотите узнать статус мутации из другого компонента
     mutationFn: usersQueries.createUser,
     onSettled: async () => {
       await queryClient.invalidateQueries({
@@ -65,18 +65,6 @@ export const UserForm = ({ refetch }: { refetch?(): void }) => {
 };
 
 // {isError ? <div> {error.message}</div> : null}
-
-{
-  /* <button
-disabled={isPending}
-className={classNames(
-  "px-2 py-1 rounded cursor-pointer bg-green-200 hover:bg-green-400",
-  isPending && "opacity-50"
-)}
->
-Добавить
-</button> */
-}
 
 // const { mutate, isPending, isError, error } = useCreateUser();
 

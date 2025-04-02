@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { usersQueries, QUERY_KEYS, IUserDto } from "../../queries/users";
-import { IPagination } from "../../types";
+import { usersQueries, QUERY_KEYS, IUserDto } from "../queries/users";
+import { IPagination } from "../types";
 
 export const useDeleteUserFromPage = (page: number) => {
   const queryClient = useQueryClient();

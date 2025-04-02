@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import classNames from "classnames";
-import { usersQueries } from "../../queries/users";
-import { UserListItem } from "../common/UserListItem";
-import { UserForm } from "../UserForm/UserForm";
-import { useDeleteUserFromPage } from "./useDeleteUser";
+import { usersQueries } from "../queries/users";
+import { UserListItem } from "./UserListItem";
+import { useDeleteUserFromPage } from "../hooks/useDeleteUser";
 
 export const UserList = () => {
   const [page, setPage] = useState(1);
@@ -15,7 +14,6 @@ export const UserList = () => {
     error,
     isLoading,
     isPlaceholderData,
-    // refetch,
   } = useQuery({
     ...usersQueries.getUsersWithPagination(page, !isLoadAll),
   });
@@ -37,11 +35,8 @@ export const UserList = () => {
 
   const usersData = isLoadAll ? usersAll : users?.data;
 
-  console.log("isPending", isPending);
-
   return (
     <section>
-      {/* <UserForm refetch={refetch} /> */}
       <div className="flex gap-2 justify-between align-middle">
         <div className="flex gap-2">
           <button onClick={() => setLoadAll(!isLoadAll)} className={btnAcions}>

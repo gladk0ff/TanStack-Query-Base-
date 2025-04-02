@@ -1,6 +1,5 @@
-import { IUserDto } from "../../queries/users";
-import DeleteIcon from "../../images/delete-svgrepo-com.svg";
-import classNames from "classnames";
+import { IUserDto } from "../queries/users";
+import DeleteIcon from "../images/delete-svgrepo-com.svg";
 
 export const UserListItem = ({
   data,

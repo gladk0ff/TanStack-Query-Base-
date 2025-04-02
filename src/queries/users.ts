@@ -16,6 +16,7 @@ export interface IUserDto {
 
 export const QUERY_KEYS = {
   users: "users",
+  usersAll: "users-all",
 };
 
 const getUsersInfinity = () => {
@@ -37,25 +38,20 @@ const getUsersWithPagination = (
   isEnabled: boolean = true
 ) => {
   return queryOptions({
-    // staleTime: Infinity,
-    // gcTime: 1000,
     queryKey: [QUERY_KEYS.users, page],
     queryFn: ({ queryKey, signal }) =>
       fetchClient<IPagination<IUserDto>>(
         `/users?_sort=dateCrated&_order=asc&_page=${queryKey[1]}&_per_page=10`,
         { signal }
       ),
-    placeholderData: keepPreviousData, // так же можно задать и функцию
-    // наполняет кеш  запроса из другого источника (localeStorage,somedata)
-    // очень полезен для ssr
-    // initialData: INITIAL_DATA as unknown as IPagination<IUserDto>,
+    placeholderData: keepPreviousData,
     enabled: isEnabled,
   });
 };
 
 const getUsersAll = (isEnabled: boolean) => {
   return queryOptions({
-    queryKey: ["users-all"],
+    queryKey: [QUERY_KEYS.usersAll],
     queryFn: (meta) => fetchClient("/users", meta),
     enabled: isEnabled,
     initialData: INITIAL_ALL_DATA as unknown as IUserDto[],
