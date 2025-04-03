@@ -22,7 +22,7 @@ export const UserList = () => {
     ...usersQueries.getUsersAll(isLoadAll),
   });
 
-  const { isPending, onDelete } = useDeleteUserFromPage(page);
+  const { getCurrentUserPendingState, onDelete } = useDeleteUserFromPage(page);
 
   const btnClass = "px-2 py-1  rounded cursor-pointer ";
   const btnAcions = btnClass + "bg-blue-200 hover:bg-blue-400";
@@ -78,9 +78,10 @@ export const UserList = () => {
         {usersData?.map((user) => (
           <li key={user.id}>
             <UserListItem
+              currentPage={page}
               data={user}
               onDelete={onDelete}
-              isDeletePending={isPending}
+              isDeletePending={getCurrentUserPendingState(user.id)}
             />
           </li>
         ))}

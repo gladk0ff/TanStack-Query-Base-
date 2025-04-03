@@ -1,76 +1,6 @@
 {
   "users": [
     {
-      "id": "2",
-      "firstName": "Michael",
-      "lastName": "Williams",
-      "maidenName": "",
-      "age": 35,
-      "gender": "male",
-      "email": "michael.williams@x.dummyjson.com",
-      "phone": "+49 258-627-6644",
-      "username": "michaelw",
-      "password": "michaelwpass",
-      "birthDate": "1989-8-10",
-      "image": "https://dummyjson.com/icon/michaelw/128",
-      "bloodGroup": "B+",
-      "height": 186.22,
-      "weight": 76.32,
-      "eyeColor": "Red",
-      "hair": {
-        "color": "Green",
-        "type": "Straight"
-      },
-      "ip": "12.13.116.142",
-      "address": {
-        "address": "385 Fifth Street",
-        "city": "Houston",
-        "state": "Alabama",
-        "stateCode": "AL",
-        "postalCode": "38807",
-        "coordinates": {
-          "lat": 22.815468,
-          "lng": 115.608581
-        },
-        "country": "United States"
-      },
-      "macAddress": "79:15:78:99:60:aa",
-      "university": "Ohio State University",
-      "bank": {
-        "cardExpire": "02/27",
-        "cardNumber": "6737807858721625",
-        "cardType": "Elo",
-        "currency": "SEK",
-        "iban": "83IDT77FWYLCJVR8ISDACFH0"
-      },
-      "company": {
-        "department": "Support",
-        "name": "Spinka - Dickinson",
-        "title": "Support Specialist",
-        "address": {
-          "address": "395 Main Street",
-          "city": "Los Angeles",
-          "state": "New Hampshire",
-          "stateCode": "NH",
-          "postalCode": "73442",
-          "coordinates": {
-            "lat": 79.098326,
-            "lng": -119.624845
-          },
-          "country": "United States"
-        }
-      },
-      "ein": "912-602",
-      "ssn": "108-953-962",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/97.0.1072.76 Safari/537.36",
-      "crypto": {
-        "coin": "Bitcoin",
-        "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
-        "network": "Ethereum (ERC20)"
-      },
-      "role": "admin"
-    },
-    {
       "id": "3",
       "firstName": "Sophia",
       "lastName": "Brown",
@@ -282,7 +212,7 @@
     },
     {
       "id": "6",
-      "firstName": "Olivia",
+      "firstName": "Olivia1",
       "lastName": "Wilson",
       "maidenName": "",
       "age": 22,
@@ -352,7 +282,7 @@
     },
     {
       "id": "7",
-      "firstName": "Alexander",
+      "firstName": "Alexander22",
       "lastName": "Jones",
       "maidenName": "",
       "age": 38,
@@ -3291,40 +3221,10 @@
       "role": "user"
     },
     {
-      "id": "179877bd-b10d-4ad4-9d73-6ee839ac9a07",
-      "age": 11,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:20:48.840Z"
-    },
-    {
-      "id": "dd9803a2-b07a-4299-8cbb-750204e70043",
-      "age": 22,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:21:06.478Z"
-    },
-    {
-      "id": "9fdd79dd-30d2-4ba5-8b0f-0904bf0b5089",
-      "age": 23,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:22:51.477Z"
-    },
-    {
-      "id": "da54cc94-2712-4149-95ca-a925dc352802",
-      "age": 24,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:23:23.267Z"
-    },
-    {
-      "id": "ce0d4ed3-f0e4-4ee9-9b60-2efcdc7f30b0",
-      "age": 25,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:24:08.233Z"
-    },
-    {
-      "id": "1539f41a-f157-4de0-994b-52989abe5f4c",
-      "age": 26,
-      "firstName": "тест",
-      "dateCrated": "2025-03-16T10:25:33.873Z"
+      "id": "04815f7c-b068-4453-b0c1-4ddc57d584be",
+      "age": "110",
+      "firstName": "Маня",
+      "dateCrated": "2025-04-03T13:18:07.457Z"
     }
   ]
 }

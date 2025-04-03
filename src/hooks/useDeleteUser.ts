@@ -7,6 +7,10 @@ export const useDeleteUserFromPage = (page: number) => {
 
   const userDeleteMuatation = useMutation({
     mutationFn: usersQueries.deleteUser,
+    onSettled: async () =>
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.users],
+      }),
     onSuccess: async (_, deleteId) => {
       const userData = queryClient.getQueryData<IPagination<IUserDto>>([
         QUERY_KEYS.users,
@@ -14,25 +18,25 @@ export const useDeleteUserFromPage = (page: number) => {
       ]);
 
       if (userData?.data) {
+        const newData = userData.data.filter((user) => user.id !== deleteId);
+
         queryClient.setQueryData(
           [QUERY_KEYS.users, page],
           (oldData: IPagination<IUserDto>) => {
             return {
               ...oldData,
-              data: oldData.data.filter((user) => user.id !== deleteId),
+              data: newData,
             };
           }
         );
       }
     },
-    onSettled: async () =>
-      await queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.users],
-      }),
   });
 
   return {
     onDelete: userDeleteMuatation.mutate,
     isPending: userDeleteMuatation.isPending,
+    getCurrentUserPendingState: (id: string) =>
+      userDeleteMuatation.isPending && userDeleteMuatation.variables === id,
   };
 };
